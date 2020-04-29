@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bootstrap</title>
-    <link rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <h1>Bootstrap</h1>
 
-    <div id="ducks"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootstrap</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="main.css" />
+</head>
 
-    <script src="main.js"></script>
-  </body>
+<body>
+  <h1>Bootstrap</h1>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-primary" id="small-btn">Small</button>
+    <button type="button" class="btn btn-primary" id="medium-btn">Medium</button>
+    <button type="button" class="btn btn-primary" id="large-btn">Large</button>
+  </div>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" id="male-btn">Male Ducks</button>
+    <button type="button" class="btn btn-secondary" id="female-btn">Female Ducks</button>
+    <button type="button" class="btn btn-secondary" id="rubber-btn">Rubber Ducks</button>
+  </div>
+
+  <button type="button" class="btn btn-danger" id="reset-btn">Reset</button>
+
+  <div class="container">
+    <div class="row" id="ducks">
+      <!-- <div id="ducks"></div> -->
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
 </html>
