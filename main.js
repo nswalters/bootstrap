@@ -34,7 +34,7 @@ const ducks = [
   {
     color: "Yellow",
     name: "DeBugger",
-    breed: "duckling",
+    breed: "Duckling",
     size: "small", // one of: small, medium, large
     temperament: "inantimate",
     imageUrl:
@@ -58,7 +58,7 @@ const ducks = [
   {
     color: "Yellow",
     name: "Charlie",
-    breed: "artsy",
+    breed: "Artsy",
     size: "large", // one of: small, medium, large
     temperament: "angry",
     imageUrl:
@@ -105,30 +105,93 @@ const ducks = [
   },
 ];
 
+// EVENT LISTENERS
+const smallBtn = document.getElementById("small-btn");
+const mediumBtn = document.getElementById("medium-btn");
+const largeBtn = document.getElementById("large-btn");
+const resetBtn = document.getElementById("reset-btn");
+
+const maleBtn = document.getElementById("male-btn");
+const femaleBtn = document.getElementById("female-btn");
+const rubberBtn = document.getElementById("rubber-btn");
+
+const filterDucks = (matchAttribute, value) => {
+  filteredDucks = [];
+
+  ducks.forEach((duck) => {
+    if (duck[matchAttribute] === value) {
+      filteredDucks.push(duck);
+    }
+  });
+
+  buildDuckCards(filteredDucks);
+};
+
+maleBtn.addEventListener("click", function () {
+  filterDucks("gender", "male");
+});
+
+femaleBtn.addEventListener("click", function () {
+  filterDucks("gender", "female");
+});
+
+rubberBtn.addEventListener("click", function () {
+  filterDucks("isRubber", true);
+});
+
+smallBtn.addEventListener("click", function () {
+  filterDucks("size", "small");
+});
+
+mediumBtn.addEventListener("click", function () {
+  filterDucks("size", "medium");
+});
+
+largeBtn.addEventListener("click", function () {
+  filterDucks("size", "large");
+});
+
+resetBtn.addEventListener("click", function () {
+  buildDuckCards(ducks);
+});
+
 const printToDom = (selector, toPrint) => {
   document.querySelector(selector).innerHTML = toPrint;
 };
 
-const buildDuckCards = () => {
+const buildDuckCards = (ducksArray) => {
   let domString = "";
 
-  for (let index = 0; index < ducks.length; index++) {
-    const duck = ducks[index];
+  for (let index = 0; index < ducksArray.length; index++) {
+    const duck = ducksArray[index];
+
+    if (index % 3 === 0) {
+      domString += `<div class="row">`;
+    }
 
     domString += `
-    <div class="duck">
-      <h3>${duck.name}</h3>
-      <img src="${duck.imageUrl}">
-      <p>${duck.name} is a ${duck.breed}.  ${
-      duck.gender === "male" ? "He" : "She"
-    } is ${duck.age} years old, is a ${duck.size}, ${
-      duck.color
-    } duck, and very ${duck.temperament}.</p>
-    `;
+      <div class="card m-5 duck-${duck.size}">
+        <div class="card-header">
+          ${duck.name}
+        </div>
+        <img class="card-img-top" src="${duck.imageUrl}">
+        <div class="card-body">
+          <h5 class="card-title">${duck.breed}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Gender: ${duck.gender}</li>
+            <li class="list-group-item">Age: ${duck.age}</li>
+            <li class="list-group-item">Size: ${duck.size}</li>
+            <li class="list-group-item">Color: ${duck.color}</li>
+            <li class="list-group-item">Temperament: ${duck.temperament}</li>
+          </ul>`;
 
     if (duck.isRubber) {
-      domString += `<p>Don't let the above fool you though.  This is actually just a rubber duck!</p></div>`;
+      domString += `<p><em><small>Don't let the above fool you though.  This is actually just a rubber duck!</small></em></p></div></div>`;
     } else {
+      domString += `</div></div>`;
+    }
+
+    if (index % 3 === 0) {
       domString += `</div>`;
     }
   }
@@ -137,7 +200,7 @@ const buildDuckCards = () => {
 };
 
 const init = () => {
-  buildDuckCards();
+  buildDuckCards(ducks);
 };
 
 init();
